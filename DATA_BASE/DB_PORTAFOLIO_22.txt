@@ -26,8 +26,10 @@ DROP TABLE error;
  
 CREATE TABLE error (
     id_error                INT(10),
-    RUTINE                  VARCHAR(100),
-    ERROR                   VARCHAR(100),  
+    rutine                  VARCHAR(100),
+    error                   VARCHAR(100),
+    publication_date    datetime(6),
+    modification_date    datetime(6),  
 
     CONSTRAINT error_pk PRIMARY KEY ( id_error)
 ); 
@@ -171,8 +173,10 @@ ALTER TABLE post
 
 CREATE TABLE error (
     id_error                INT(10),
-    RUTINE                  VARCHAR(100),
-    ERROR                   VARCHAR(100),  
+    rutine                  VARCHAR(100),
+    error                   VARCHAR(100),
+    publication_date    datetime(6),
+    modification_date    datetime(6),  
 
     CONSTRAINT error_pk PRIMARY KEY ( id_error)
 );                          

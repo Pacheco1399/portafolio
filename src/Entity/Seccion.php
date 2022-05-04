@@ -1,30 +1,16 @@
 <?php
 
+namespace App\Entity;
 
-    namespace App\Entity;
-
-    class Admin
+    class Seccion
     {
-        public int $ge_admin_id;
-        public string $username;
-        public string $email;
-        public string $password;
-        public string $fullname;
-        public string $rut;
-        public int $phone;
-        public int $second_phone;
-        public int $status;
-        public int $last_ip;
-        public string $last_login;
+        public int $id_seccion;
+        public int $id_carrera;
+        public string $title;
+        public string $description;
         public string $publication_date;
         public string $modification_date;
-
-
-
-
     }
-
-
 
 
 
