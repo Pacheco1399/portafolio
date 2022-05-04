@@ -1,0 +1,287 @@
+--------------------------------------------------------------------------------------------CODIGO NO UTILIZABLE EN PHPMYADMIN
+--------------------------------------------------------------------------------------------MAS ABAJO DEJE UNO LISTO
+-------------------------------------------------------------------------------------------- DROP TABLE
+
+
+DROP TABLE categoria;
+DROP TABLE escuela;
+DROP TABLE carrera;
+DROP TABLE seccion;
+DROP TABLE usuario;
+DROP TABLE comment;
+DROP TABLE post;
+DROP TABLE votes;
+DROP TABLE error;
+
+
+
+--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------- CREATE TABLE
+--------------------------------------------------------------------------------------------
+
+
+ 
+
+ -------------------------------------------------------------------------------------------- TABLA ERROR 
+ 
+CREATE TABLE error (
+    id_error                INT(10),
+    RUTINE                  VARCHAR(100),
+    ERROR                   VARCHAR(100),  
+
+    CONSTRAINT error_pk PRIMARY KEY ( id_error)
+); 
+
+-------------------------------------------------------------------------------------------- ESCUELA                               
+
+CREATE TABLE escuela (
+    id_escuela          INT(10) NOT NULL,
+    title              VARCHAR(40) NOT NULL,
+    description         VARCHAR(100) NOT NULL,
+    publication_date    datetime(6),
+    modification_date    datetime(6),
+
+    CONSTRAINT escuela_pk PRIMARY KEY ( id_escuela)
+);
+
+-------------------------------------------------------------------------------------------- CARRERA                               
+
+CREATE TABLE carrera (
+    id_carrera              INT(10) NOT NULL,
+    id_escuela              INT(10) NOT NULL,
+    title                  VARCHAR(40) NOT NULL,
+    description             VARCHAR(100) NOT NULL,
+    publication_date   datetime(6),
+    modification_date   datetime(6),
+
+    CONSTRAINT carrera_pk PRIMARY KEY ( id_carrera),
+    CONSTRAINT carrera_escuela_fk FOREIGN KEY ( id_escuela )REFERENCES escuela ( id_escuela )
+);
+
+-------------------------------------------------------------------------------------------- SECCION                               
+CREATE TABLE seccion (
+    id_seccion          INT(10) NOT NULL,
+    id_carrera          INT(10) NOT NULL,
+    title              VARCHAR(40) NOT NULL,
+    description         VARCHAR(100) NOT NULL,
+    publication_date    datetime(6),
+    modification_date    datetime(6),
+
+    CONSTRAINT seccion_pk PRIMARY KEY ( id_seccion),
+    CONSTRAINT seccion_carrera_fk FOREIGN KEY ( id_carrera )REFERENCES carrera ( id_carrera )
+);
+
+-------------------------------------------------------------------------------------------- USUARIO                                 
+
+CREATE TABLE usuario (
+    id_usuario           INT(10) NOT NULL,
+    id_seccion           INT(10) NOT NULL,
+    username             VARCHAR(30) NOT NULL,
+    lastname             VARCHAR(30) NOT NULL,
+    password             VARCHAR(15) NOT NULL,
+    mail                 VARCHAR(50) NOT NULL,
+    phone                INT(10)    NOT NULL,
+    tipo_user            INT(10)    NOT NULL,
+    publication_date     datetime(6),
+    modification_date    datetime(6), 
+
+    CONSTRAINT usuario_pk PRIMARY KEY ( id_usuario), 
+    FOREIGN KEY (id_seccion) REFERENCES seccion (id_seccion) 
+);
+
+ -------------------------------------------------------------------------------------------- COMMENT
+
+CREATE TABLE comentario (
+    id_comentario          INT(10) NOT NULL,
+    id_usuario          INT(10) NOT NULL,
+    id_seccion          INT(10) NOT NULL,
+    id_post             INT(10) NOT NULL ,
+    id_votes           INT(10) NOT NULL,
+    title              VARCHAR(40) NOT NULL,
+    description         VARCHAR(100) NOT NULL,
+    publication_date     datetime(6),
+    modification_date    datetime(6), 
+
+    CONSTRAINT comentario_pk PRIMARY KEY ( id_comentario), 
+    CONSTRAINT comentario_usuario_fk FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario), 
+    CONSTRAINT comentario_seccion_fk FOREIGN KEY (id_seccion) REFERENCES seccion (id_seccion) 
+);
+
+ -------------------------------------------------------------------------------------------- POST
+
+CREATE TABLE post (
+    id_post             INT(10) NOT NULL,
+    id_usuario          INT(10) NOT NULL,
+    id_comentario          INT(10) NOT NULL,
+    id_votes          INT(10) NOT NULL,
+    title              VARCHAR(40) NOT NULL,
+    description         VARCHAR(100) NOT NULL,
+    publication_date    datetime(6),
+    modification_date    datetime(6),
+
+    CONSTRAINT post_pk PRIMARY KEY ( id_post), 
+    CONSTRAINT post_usuario_fk FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
+    CONSTRAINT post_comentario_fk FOREIGN KEY (id_comentario) REFERENCES comentario (id_comentario)
+);
+
+
+             
+);
+
+ -------------------------------------------------------------------------------------------- VOTES (LIKES)
+
+CREATE TABLE votes (
+    id_votes           INT(10) NOT NULL,
+    id_usuario         INT(10) NOT NULL,
+    id_post            INT(10) NOT NULL,
+    id_comentario       INT(10) NOT NULL,
+    up_count          INT(10) NOT NULL,
+    down_count          INT(10) NOT NULL,
+    publication_date     datetime(6),
+    modification_date    datetime(6),
+
+    CONSTRAINT votes_pk PRIMARY KEY ( id_votes), 
+    CONSTRAINT votes_usuario_fk FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
+    CONSTRAINT votes_post_fk FOREIGN KEY (id_post) REFERENCES post (id_post),
+    CONSTRAINT votes_comentario_fk FOREIGN KEY (id_comentario) REFERENCES comentario (id_comentario)
+);
+
+
+
+
+ -------------------------------------------------------------------------------------------- ALTER TABLE
+ 
+ALTER TABLE comentario
+   ADD CONSTRAINT comentario_post_fk FOREIGN KEY (id_post) REFERENCES post (id_post),
+     CONSTRAINT comentario_votes_fk FOREIGN KEY (id_votes) REFERENCES votes (id_votes);
+
+
+ALTER TABLE post
+   ADD CONSTRAINT post_votes_fk FOREIGN KEY (id_votes) REFERENCES votes (id_votes);
+
+
+
+--------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------- CODIGO PARA UTILIAZR EN PHPMYADMIN 
+--------------------------------------------------------------------------------------------
+
+
+
+CREATE TABLE error (
+    id_error                INT(10),
+    RUTINE                  VARCHAR(100),
+    ERROR                   VARCHAR(100),  
+
+    CONSTRAINT error_pk PRIMARY KEY ( id_error)
+);                          
+
+    
+CREATE TABLE escuela (
+    id_escuela          INT(10) NOT NULL,
+    title              VARCHAR(40) NOT NULL,
+    description         VARCHAR(100) NOT NULL,
+    publication_date    datetime(6),
+    modification_date    datetime(6),
+
+    CONSTRAINT escuela_pk PRIMARY KEY ( id_escuela)
+);
+
+CREATE TABLE carrera (
+    id_carrera              INT(10) NOT NULL,
+    id_escuela              INT(10) NOT NULL,
+    title                  VARCHAR(40) NOT NULL,
+    description             VARCHAR(100) NOT NULL,
+    publication_date   datetime(6),
+    modification_date   datetime(6),
+
+    CONSTRAINT carrera_pk PRIMARY KEY ( id_carrera),
+    CONSTRAINT carrera_escuela_fk FOREIGN KEY ( id_escuela )REFERENCES escuela ( id_escuela )
+);
+                             
+CREATE TABLE seccion (
+    id_seccion          INT(10) NOT NULL,
+    id_carrera          INT(10) NOT NULL,
+    title              VARCHAR(40) NOT NULL,
+    description         VARCHAR(100) NOT NULL,
+    publication_date    datetime(6),
+    modification_date    datetime(6),
+
+    CONSTRAINT seccion_pk PRIMARY KEY ( id_seccion),
+    CONSTRAINT seccion_carrera_fk FOREIGN KEY ( id_carrera )REFERENCES carrera ( id_carrera )
+);
+                                
+CREATE TABLE usuario (
+    id_usuario           INT(10) NOT NULL,
+    id_seccion           INT(10) NOT NULL,
+    username             VARCHAR(30) NOT NULL,
+    lastname             VARCHAR(30) NOT NULL,
+    password             VARCHAR(15) NOT NULL,
+    mail                 VARCHAR(50) NOT NULL,
+    phone                INT(10)    NOT NULL,
+    tipo_user            INT(10)    NOT NULL,
+    publication_date     datetime(6),
+    modification_date    datetime(6), 
+
+    CONSTRAINT usuario_pk PRIMARY KEY ( id_usuario), 
+    FOREIGN KEY (id_seccion) REFERENCES seccion (id_seccion) 
+);
+
+
+CREATE TABLE comentario (
+    id_comentario          INT(10) NOT NULL,
+    id_usuario          INT(10) NOT NULL,
+    id_seccion          INT(10) NOT NULL,
+    id_post             INT(10) NOT NULL ,
+    id_votes           INT(10) NOT NULL,
+    title              VARCHAR(40) NOT NULL,
+    description         VARCHAR(100) NOT NULL,
+    publication_date     datetime(6),
+    modification_date    datetime(6), 
+
+    CONSTRAINT comentario_pk PRIMARY KEY ( id_comentario), 
+    CONSTRAINT comentario_usuario_fk FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario), 
+    CONSTRAINT comentario_seccion_fk FOREIGN KEY (id_seccion) REFERENCES seccion (id_seccion) 
+);
+
+
+CREATE TABLE post (
+    id_post             INT(10) NOT NULL,
+    id_usuario          INT(10) NOT NULL,
+    id_comentario          INT(10) NOT NULL,
+    id_votes          INT(10) NOT NULL,
+    title              VARCHAR(40) NOT NULL,
+    description         VARCHAR(100) NOT NULL,
+    publication_date    datetime(6),
+    modification_date    datetime(6),
+
+    CONSTRAINT post_pk PRIMARY KEY ( id_post), 
+    CONSTRAINT post_usuario_fk FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
+    CONSTRAINT post_comentario_fk FOREIGN KEY (id_comentario) REFERENCES comentario (id_comentario)
+);
+
+
+CREATE TABLE votes (
+    id_votes           INT(10) NOT NULL,
+    id_usuario         INT(10) NOT NULL,
+    id_post            INT(10) NOT NULL,
+    id_comentario       INT(10) NOT NULL,
+    up_count          INT(10) NOT NULL,
+    down_count          INT(10) NOT NULL,
+    publication_date     datetime(6),
+    modification_date    datetime(6),
+
+    CONSTRAINT votes_pk PRIMARY KEY ( id_votes), 
+    CONSTRAINT votes_usuario_fk FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
+    CONSTRAINT votes_post_fk FOREIGN KEY (id_post) REFERENCES post (id_post),
+    CONSTRAINT votes_comentario_fk FOREIGN KEY (id_comentario) REFERENCES comentario (id_comentario)
+);
+
+
+ALTER TABLE comentario
+   ADD CONSTRAINT comentario_post_fk FOREIGN KEY (id_post) REFERENCES post (id_post),
+     CONSTRAINT comentario_votes_fk FOREIGN KEY (id_votes) REFERENCES votes (id_votes);
+
+ALTER TABLE post
+   ADD CONSTRAINT post_votes_fk FOREIGN KEY (id_votes) REFERENCES votes (id_votes);
+
+
