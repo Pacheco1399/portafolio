@@ -113,6 +113,7 @@ CREATE TABLE post (
     id_post             INT(10) NOT NULL,
     id_usuario          INT(10) NOT NULL,
     id_comentario          INT(10) NOT NULL,
+    id_seccion          INT(10) NOT NULL,
     id_votes          INT(10) NOT NULL,
     title              VARCHAR(40) NOT NULL,
     description         VARCHAR(100) NOT NULL,
@@ -121,7 +122,8 @@ CREATE TABLE post (
 
     CONSTRAINT post_pk PRIMARY KEY ( id_post), 
     CONSTRAINT post_usuario_fk FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT post_comentario_fk FOREIGN KEY (id_comentario) REFERENCES comentario (id_comentario)
+    CONSTRAINT post_comentario_fk FOREIGN KEY (id_comentario) REFERENCES comentario (id_comentario),
+    CONSTRAINT comentario_seccion_fk FOREIGN KEY (id_seccion) REFERENCES seccion (id_seccion)
 );
 
 
@@ -248,6 +250,7 @@ CREATE TABLE post (
     id_post             INT(10) NOT NULL,
     id_usuario          INT(10) NOT NULL,
     id_comentario          INT(10) NOT NULL,
+    id_seccion          INT(10) NOT NULL,
     id_votes          INT(10) NOT NULL,
     title              VARCHAR(40) NOT NULL,
     description         VARCHAR(100) NOT NULL,
@@ -256,7 +259,8 @@ CREATE TABLE post (
 
     CONSTRAINT post_pk PRIMARY KEY ( id_post), 
     CONSTRAINT post_usuario_fk FOREIGN KEY (id_usuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT post_comentario_fk FOREIGN KEY (id_comentario) REFERENCES comentario (id_comentario)
+    CONSTRAINT post_comentario_fk FOREIGN KEY (id_comentario) REFERENCES comentario (id_comentario),
+    CONSTRAINT post_seccion_fk FOREIGN KEY (id_seccion) REFERENCES seccion (id_seccion)
 );
 
 
@@ -279,7 +283,7 @@ CREATE TABLE votes (
 
 ALTER TABLE comentario
    ADD CONSTRAINT comentario_post_fk FOREIGN KEY (id_post) REFERENCES post (id_post),
-     CONSTRAINT comentario_votes_fk FOREIGN KEY (id_votes) REFERENCES votes (id_votes);
+   ADD CONSTRAINT comentario_votes_fk FOREIGN KEY (id_votes) REFERENCES votes (id_votes);
 
 ALTER TABLE post
    ADD CONSTRAINT post_votes_fk FOREIGN KEY (id_votes) REFERENCES votes (id_votes);
