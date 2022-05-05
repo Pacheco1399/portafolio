@@ -1,5 +1,4 @@
 <?php                           ?>
-<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -20,6 +19,7 @@
 
 <body>
    
-
+    <?= $this->section('contenido')?>
+    
 </body>
 </html>
