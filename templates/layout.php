@@ -18,8 +18,7 @@
 
 
 <body>
-   
-    <?= $this->section('contenido')?>
+
     
 </body>
 </html>
