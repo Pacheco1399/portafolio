@@ -7,6 +7,6 @@ use App\Controller\AdminController;
 //Controlador de las rutas Esta nos permitiran redirigirnos a los diferentes clases de nuestro proyecto
 return function (Router $router): void {
 
-    $router->get('/', [AdminController::class, 'index']);
+    $router->get('/', [\App\Controller\LandingController::class, 'index']);
 
 };
