@@ -3,9 +3,6 @@
 <div>
     <?php require_once 'vista-header/header.php' ?>
     <?php
-    if (isset($respuesta)) {
-        var_dump($respuesta['contenido']);
-    }
     $resultado = $this->e($contenido);
     switch ($resultado):
         case "index":
