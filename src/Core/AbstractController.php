@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Core;
+
 use League\Plates\Engine;
 use Psr\Http\Message\ResponseInterface;
 use Nyholm\Psr7\Response;
