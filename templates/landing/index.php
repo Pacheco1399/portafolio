@@ -1,7 +1,7 @@
 <?php /* Hace que el contenido de este template sea la sección 'content' de `layout` */ ?>
 <?php $this->layout('layout', ['title' => $title]) ?>
 <div>
-    <?php require_once 'landing/vista-header/header.php' ?>
+    <?php require_once 'vista-header/header.php' ?>
     <?php
     if (isset($respuesta)) {
         var_dump($respuesta['contenido']);
@@ -11,13 +11,13 @@
         case "index":
             $this->insert('landing/vista-contenido-principal/vista-user/principal');
             $this->insert('landing/vista-contenido-principal/vista-user/principal2');
-        break;
+            break;
         case "perfil":
             $this->insert('landing/vista-contenido-principal/vista-user/perfil');
             $this->insert('landing/vista-contenido-principal/vista-user/perfil2');
-        break;
+            break;
 
-        endswitch;
-        ?>
-    <?php require_once 'landing/vista-footer/footer.php' ?>
+    endswitch;
+    ?>
+    <?php require_once 'vista-footer/footer.php' ?>
 </div>

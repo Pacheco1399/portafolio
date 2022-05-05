@@ -28,7 +28,7 @@ class LandingController extends AbstractController
     public function index(): ResponseInterface
     {
         return $this->render('landing/index',
-            ['contenido' => 'index',
+                ['contenido' => 'perfil',
                 'title' => 'index']);
     }
 }

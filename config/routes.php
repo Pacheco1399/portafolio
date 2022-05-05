@@ -8,6 +8,6 @@ use App\Controller\LandingController;
 //Controlador de las rutas Esta nos permitiran redirigirnos a los diferentes clases de nuestro proyecto
 return function (Router $router): void {
 
-    $router->get('/', [LandingController::class, 'index']);
+    $router->get('/perfil', [LandingController::class, 'index']);
 
 };
